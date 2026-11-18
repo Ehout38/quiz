@@ -1,0 +1,11 @@
+@model int
+@{
+    ViewData["Title"] = "Start";
+}
+<section class="card intro">
+    <p class="eyebrow">CHECK YOUR KNOWLEDGE</p>
+    <h1>Ready for a<br />quick challenge?</h1>
+    <p class="muted">@Model questions about C#, ASP.NET Core and the web. Pick one answer for each question and see your result at the end.</p>
+    <div class="facts"><span>@Model questions</span><span>4 options each</span><span>No time limit</span></div>
+    <form asp-action="Start" method="post"><button class="button" type="submit">Start the quiz <span aria-hidden="true">&rarr;</span></button></form>
+</section>
