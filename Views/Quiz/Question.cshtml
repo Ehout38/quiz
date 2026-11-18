@@ -1,0 +1,25 @@
+@model QuestionViewModel
+@{
+    ViewData["Title"] = $"Question {Model.Number}";
+}
+<section class="card">
+    <div class="question-top"><p class="eyebrow">QUESTION @Model.Number OF @Model.Total</p><span class="muted">C# &amp; WEB</span></div>
+    <progress value="@(Model.Number - 1)" max="@Model.Total" aria-label="Quiz progress"></progress>
+    <h1 class="question">@Model.Text</h1>
+    <form asp-action="Answer" method="post">
+        <input asp-for="QuestionId" type="hidden" />
+        <fieldset class="answers">
+            <legend>Choose one answer</legend>
+            @for (var i = 0; i < Model.Answers.Length; i++)
+            {
+                <label class="answer" for="answer-@i">
+                    <input asp-for="SelectedAnswer" id="answer-@i" type="radio" value="@i" required />
+                    <span class="letter">@((char)('A' + i))</span>
+                    <span>@Model.Answers[i]</span>
+                </label>
+            }
+        </fieldset>
+        <span asp-validation-for="SelectedAnswer" class="error" role="alert"></span>
+        <button class="button" type="submit">@(Model.Number == Model.Total ? "Finish quiz" : "Next question") <span aria-hidden="true">&rarr;</span></button>
+    </form>
+</section>
