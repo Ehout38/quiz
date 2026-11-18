@@ -1,0 +1,24 @@
+@model ResultViewModel
+@{
+    ViewData["Title"] = "Result";
+}
+<section class="card">
+    <p class="eyebrow">QUIZ COMPLETE</p>
+    <h1>Your result</h1>
+    <div class="score"><strong>@Model.Percentage<span>%</span></strong><p>@Model.Correct of @Model.Total correct answers</p></div>
+    <h2>Answer review</h2>
+    <ol class="review">
+        @foreach (var item in Model.Items)
+        {
+            <li class="@(item.IsCorrect ? "correct" : "incorrect")">
+                <strong>@item.Question</strong>
+                <p><b>@(item.IsCorrect ? "Correct" : "Incorrect"):</b> @item.Selected</p>
+                @if (!item.IsCorrect)
+                {
+                    <p class="muted">Correct answer: @item.Correct</p>
+                }
+            </li>
+        }
+    </ol>
+    <form asp-action="Start" method="post"><button class="button" type="submit">Try again</button></form>
+</section>
